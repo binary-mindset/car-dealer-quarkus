@@ -1,0 +1,127 @@
+openapi: 3.0.2
+info:
+  title: Car Dealer API
+  description: This is the Car Dealer API
+  version: '0.0.1'
+servers:
+  - url: http://localhost:8080/car-dealer/v1
+
+tags:
+  - name: Brands
+    description: Operations with brands
+  - name: Storage
+    description: Operations to manage the storage
+
+paths:
+  /brands:
+    get:
+      tags:
+        - Brands
+      summary: Returns the list of existing brands
+      operationId: getBrands
+      responses:
+        200:
+          description: List of existing brands
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BrandResponse'
+    post:
+      tags:
+        - Brands
+      summary: Creates a new brand
+      operationId: createBrand
+      requestBody:
+        description: Brand body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BrandRequest'
+      responses:
+        201:
+          description: Brand created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandResponse'
+
+  /brands/{brandId}:
+    get:
+      tags:
+        - Brands
+      summary: Returns a specific brand
+      operationId: getBrand
+      parameters:
+        - name: brandId
+          in: path
+          description: Id of the brand to request
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Brand found successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandResponse'
+
+    delete:
+      tags:
+        - Brands
+      summary: Delete an existing brand
+      operationId: deleteBrand
+      parameters:
+        - name: brandId
+          in: path
+          description: Id of the brand to request
+          required: true
+          schema:
+            type: integer
+      responses:
+        204:
+          description: Brand deleted
+
+components:
+  schemas:
+    BrandRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    BrandResponse:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/BrandRequest'
+      properties:
+        id:
+          type: integer
+    CreateCarRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        petType:
+          type: string
+          enum:
+            - DOG
+            - CAT
+            - BIRD
+        price:
+          type: number
+          format: float
+        priceOffer:
+          type: number
+          format: float
+        categoryId:
+          type: integer
+        available:
+          type: boolean
+          default: true
