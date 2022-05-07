@@ -4,19 +4,12 @@ import com.binary.mindset.cardealer.BrandsApi;
 import com.binary.mindset.cardealer.mapper.BrandMapper;
 import com.binary.mindset.cardealer.model.BrandDto;
 import com.binary.mindset.cardealer.model.BrandRequest;
-import com.binary.mindset.cardealer.model.BrandResponse;
 import com.binary.mindset.cardealer.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
-import javax.ws.rs.core.UriInfo;
-import java.net.URI;
-import java.util.Collections;
 import java.util.List;
 
 @RestController
